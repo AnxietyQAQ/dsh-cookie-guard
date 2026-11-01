@@ -60,7 +60,7 @@ dsh plugin --profile desktop add dsh-cookie-guard
 ### Local checkout
 
 ```bash
-git clone https://github.com/Lycor/dsh-cookie-guard.git
+git clone https://github.com/AnxietyQAQ/dsh-cookie-guard.git
 cd dsh-cookie-guard
 node scripts/install.mjs                 # installs into ~/.dsh/profiles/desktop
 node scripts/install.mjs --profile web   # or another profile

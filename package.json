@@ -12,7 +12,7 @@
     "electron"
   ],
   "license": "MIT",
-  "author": "Lycor",
+  "author": "AnxietyQAQ",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -40,11 +40,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lycor/dsh-cookie-guard.git"
+    "url": "git+https://github.com/AnxietyQAQ/dsh-cookie-guard.git"
   },
-  "homepage": "https://github.com/Lycor/dsh-cookie-guard#readme",
+  "homepage": "https://github.com/AnxietyQAQ/dsh-cookie-guard#readme",
   "bugs": {
-    "url": "https://github.com/Lycor/dsh-cookie-guard/issues"
+    "url": "https://github.com/AnxietyQAQ/dsh-cookie-guard/issues"
   },
   "dsh": {
     "bundle": {
