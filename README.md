@@ -57,7 +57,7 @@ Design constraints, deliberately:
 dsh plugin --profile desktop add dsh-cookie-guard
 ```
 
-### Local checkout (no pnpm needed)
+### Local checkout
 
 ```bash
 git clone https://github.com/Lycor/dsh-cookie-guard.git
@@ -67,10 +67,18 @@ node scripts/install.mjs --profile web   # or another profile
 node scripts/install.mjs --uninstall     # remove it again
 ```
 
-The script copies the package into `<profile>/node_modules/dsh-cookie-guard`, then appends a mount row to
-`<profile>/cordis.patch.yml` (backing the file up first). Use `--dry-run` to preview.
+`scripts/install.mjs` declares the plugin the way the app itself does — a `link:` dependency plus a
+`dsh.profile.bundles` entry in `<profile>/package.json` — and then runs pnpm so the profile gets a real
+symlink. Do it this way: the Plugins page lists profile bundles, so a plugin that only sits in
+`cordis.patch.yml` stays invisible there. It also survives later plugin-manager installs, which rebuild
+`node_modules` from the lockfile. Use `--dry-run` to preview.
 
-### Manual
+If pnpm cannot run (for example `ERR_PNPM_UNEXPECTED_STORE`), the script falls back to hand-mounting:
+it copies the package into `<profile>/node_modules/dsh-cookie-guard` and appends a mount row to
+`<profile>/cordis.patch.yml`. Same fix, but the Plugins page will not list it and a plugin-manager
+install can remove the copy; re-run the script when that happens. `--legacy` forces this fallback.
+
+### Manual (fallback)
 
 Copy this directory to `~/.dsh/profiles/<profile>/node_modules/dsh-cookie-guard` and append to the
 profile's `cordis.patch.yml`:
@@ -124,8 +132,12 @@ then for `Set-Cookie: … Max-Age=0` on the next request:
 
 ## Uninstall / 卸载
 
-Remove the `- insert:` block from `cordis.patch.yml`, delete
-`<profile>/node_modules/dsh-cookie-guard`, restart DSH — or run `node scripts/install.mjs --uninstall`.
+`node scripts/install.mjs --uninstall` drops the dependency, the bundle entry and the `node_modules`
+link, then prunes the legacy mount row if one is present. Restart DSH afterwards.
+
+Manually: remove `<profile>/node_modules/dsh-cookie-guard`, the `dsh-cookie-guard` entries from
+`<profile>/package.json` (`dependencies` and `dsh.profile.bundles`) and any `- insert:` block in
+`<profile>/cordis.patch.yml`, then restart.
 
 If DSH is already stuck and you just need to get in: quit DSH fully and rename
 `%APPDATA%\@deepseek-ai\dsh-desktop\Network\Cookies` (it is recreated on the next launch).
@@ -140,8 +152,9 @@ If DSH is already stuck and you just need to get in: quit DSH fully and rename
   `--port 0` (a stable port overwrites one cookie instead of adding one), or for
   `dsh-client-connection` to garbage-collect `dsh-auth-*`. This plugin modifies **no** shipped files,
   so it survives DSH upgrades and is removed cleanly.
-- A plugin-manager reinstall may rebuild `node_modules` and drop the copied package; re-run
-  `node scripts/install.mjs` afterwards.
+- If you installed with the pnpm route, the profile keeps a symlink to this checkout, so edits here apply
+  on the next launch. A plugin-manager install rebuilds `node_modules` from the lockfile, which keeps the
+  symlink; the hand-mounted fallback is the variant that gets pruned.
 
 ## License
 
