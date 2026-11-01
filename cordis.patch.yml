@@ -1,0 +1,19 @@
+# dsh-cookie-guard bundle patch
+#
+# Mounts the guard row. Because this file is declared as `dsh.bundle.patch`,
+# adding `dsh-cookie-guard` to the profile's `dsh.profile.bundles` (or running
+# `dsh plugin --profile <name> add <path-or-package>`) mounts it without any
+# manual profile edit. The manual mount line for the same row is:
+#
+#   - id: cookie-guard
+#     name: dsh-cookie-guard
+- insert:
+    - id: cookie-guard
+      name: dsh-cookie-guard
+      config:
+        # Node's default is 16384 bytes; the accumulated dsh-auth cookies it
+        # rejects are legitimate, so give the listener room to authenticate them.
+        maxHeaderSize: 131072
+        # Expire dsh-auth cookies minted for authorities that no longer listen.
+        cleanStale: true
+        log: true

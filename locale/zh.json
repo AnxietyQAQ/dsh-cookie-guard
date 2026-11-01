@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Cookie 守卫",
+    "description": "修复 DSH 桌面版「第 72 次打开必崩」：抬高 host 请求头上限，并清理死端口遗留的 dsh-auth cookie。"
+  }
+}

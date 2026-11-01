@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Cookie Guard",
+    "description": "Fixes the DSH desktop \"launch #72\" crash: raises the host HTTP header budget and expires dsh-auth cookies left by dead ports."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "name": "dsh-cookie-guard",
+  "version": "1.0.0",
+  "description": "Stops the DSH desktop \"launch #72\" crash: raises the host HTTP header budget and expires stale dsh-auth cookies.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "cookie",
+    "authentication",
+    "electron"
+  ],
+  "license": "MIT",
+  "author": "Lycor",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/",
+    "test/",
+    "cordis.patch.yml",
+    "locale/",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node test/run.mjs",
+    "install:local": "node scripts/install.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lycor/dsh-cookie-guard.git"
+  },
+  "homepage": "https://github.com/Lycor/dsh-cookie-guard#readme",
+  "bugs": {
+    "url": "https://github.com/Lycor/dsh-cookie-guard/issues"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
