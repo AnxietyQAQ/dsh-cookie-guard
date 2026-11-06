@@ -1,7 +1,6 @@
 # Forge Panel Test
 
-Throwaway file used to verify the DSH experimental forge bundle sidebar PR panel
-(checks / review / diff). Safe to delete.
+这个文件用于验证 DSH forge bundle 侧栏 PR 面板（checks / review / diff）。用完即删。
 
-- created: 2026-11-06
-- branch: forge-panel-test
+- 创建日期：2026-11-06
+- 分支：forge-panel-test
